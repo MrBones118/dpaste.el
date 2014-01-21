@@ -77,6 +77,10 @@
                                        (xml-mode . "Xml")))
 
 
+(defvar dpaste-url "https://dpaste.de"
+  "Paste author name or e-mail. Don't put more than 30 characters here.")
+
+
 ;;;###autoload
 (defun dpaste-region (begin end title &optional arg)
   "Post the current region or buffer to dpaste.com and yank the
@@ -97,14 +101,14 @@ With a prefix argument, use hold option."
                                      " -F 'title=" title "'"
                                      " -F 'poster=" dpaste-poster "'"
                                      " -F 'hold=" hold "'"
-                                     " http://dpaste.com/api/v1/")
+                                     " " dpaste-url "/api/")
 			     output)
     (with-current-buffer output
       (beginning-of-buffer)
-      (search-forward-regexp "^Location: \\(http://dpaste\\.com/\\(hold/\\)?[0-9]+/\\)")
+      (search-forward-regexp (concat "^\"\\(" dpaste-url "/\\(host/\\)?.+\\)\"$"))
       (message "Paste created: %s (yanked)" (match-string 1))
       (kill-new (match-string 1)))
-    (kill-buffer output)))
+    ))
 
 ;;;###autoload
 (defun dpaste-buffer (title &optional arg)
