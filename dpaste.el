@@ -63,6 +63,10 @@
 (defvar dpaste-poster "dpaste.el"
   "Paste author name or e-mail. Don't put more than 30 characters here.")
 
+(defvar dpaste-url "https://dpaste.de"
+  "Url of the server providing dpaste.")
+
+
 (defvar dpaste-supported-modes-alist '((css-mode . "Css")
                                        (diff-mode . "Diff")
                                        (haskell-mode . "Haskell")
@@ -75,11 +79,6 @@
                                        (sql-mode . "Sql")
                                        (sh-mode . "Bash")
                                        (xml-mode . "Xml")))
-
-
-(defvar dpaste-url "https://dpaste.de"
-  "Paste author name or e-mail. Don't put more than 30 characters here.")
-
 
 ;;;###autoload
 (defun dpaste-region (begin end title &optional arg)
